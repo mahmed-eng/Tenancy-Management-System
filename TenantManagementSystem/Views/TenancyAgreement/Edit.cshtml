@@ -1,0 +1,152 @@
+﻿@model TenantManagementSystem.Models.TenancyAgreement
+@{
+    /**/
+
+    ViewBag.Title = "TenancyAgreement";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+<!DOCTYPE html>
+
+<h2>Edit Tenancy Agreement</h2>
+
+@section styles
+    {
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+}
+<link href="~/Content/BackEnd/css/jqueryUI.css" rel="stylesheet" />
+<br /><br />
+
+@{
+    if (ViewBag.Message == null)
+    { }
+    else
+    {
+        <div class="alert alert-success" role="alert">
+            <strong>@ViewBag.Message</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+<section class="wrapper">
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Edit Tenancy Agreement
+                    </header>
+                    <div class="panel-body">
+                        <div class="position-center">
+
+                            @using (Html.BeginForm(null, null, FormMethod.Post))
+                            {
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.AgreementNumber)
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.AgreementNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.AgreementNumber)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.LessorId)
+                                    @Html.DropDownListFor(TenancyAgreement => TenancyAgreement.LessorId, new SelectList(ViewBag.Lessor, "Id", "Name"), "------Select Lessor------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.LessorId)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.LesseeId)
+                                    @Html.DropDownListFor(TenancyAgreement => TenancyAgreement.LesseeId, new SelectList(ViewBag.Lessee, "Id", "Name"), "------Select Lessee------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.LesseeId)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.BuildingId)
+                                    @Html.DropDownListFor(TenancyAgreement => TenancyAgreement.BuildingId, new SelectList(ViewBag.Building, "Id", "Name"), "------Select Building------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.BuildingId)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.FlatId)
+                                    @Html.DropDownListFor(TenancyAgreement => TenancyAgreement.FlatId, new SelectList(ViewBag.Flat, "Id", "Name"), "------Select Flat------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.FlatId)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.StartDate)
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.StartDate, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.StartDate)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.EndDate)
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.EndDate, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.EndDate)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.RentDurationinDays)
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.RentDurationinDays, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.RentDurationinDays)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.RentDurationinMonths)
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.RentDurationinMonths, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.RentDurationinMonths)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.MonthlyAmount)
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.MonthlyAmount, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.MonthlyAmount)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.TotalAmount)
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.TotalAmount, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.TotalAmount)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.IsStarted)
+                                    @Html.CheckBoxFor(TenancyAgreement => TenancyAgreement.IsStarted, new { @class = "form-control" })
+                                    @*@Html.CheckBoxFor(TenancyAgreement => TenancyAgreement.IsStarted)*@
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.IsStarted)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.IsCompleted)
+                                    @Html.CheckBoxFor(TenancyAgreement => TenancyAgreement.IsCompleted, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.IsCompleted)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.IsCancelled)
+                                    @Html.CheckBoxFor(TenancyAgreement => TenancyAgreement.IsCancelled, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.IsCancelled)
+                                </div>
+
+
+
+                                <button type="submit" class="btn btn-info">Save</button>
+                            }
+                        </div>
+
+
+
+                    </div>
+
+                </section>
+                <div>
+                    @Html.ActionLink("Back to List", "ViewTenancyAgreement")
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

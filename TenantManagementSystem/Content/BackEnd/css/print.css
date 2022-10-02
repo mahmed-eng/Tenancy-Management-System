@@ -1,0 +1,63 @@
+﻿
+.logo img {
+    margin-left: 290px;
+    height: 120px;
+    width: 120px;
+}
+
+.logo h3 {
+    color: #3A87AD !important;
+    font-weight: bold !important;
+}
+
+.logo h4 {
+    color: #47A447 !important;
+    font-weight: bold !important;
+    margin-bottom: 30px !important;
+}
+
+.result table tr th {
+    color: maroon !important;
+}
+
+#nameRegTable {
+    margin-bottom: 20px !important;
+}
+
+#nameRegTable tr th {
+    font-weight: bold !important;
+}
+
+#signature tr th {
+    color: #3a87ad !important;
+}
+
+#signature {
+    margin-bottom: 50px !important;
+}
+
+#signature{
+    font-weight: bold !important;
+    color: black !important;
+    margin-left: 520px !important;
+    margin-top: 75px !important;
+}
+
+#time {
+    font-size: 15px !important;
+}
+
+#pdf {
+    visibility: hidden;
+}
+
+#pdf.logo {
+    visibility: visible;
+}
+#pdf {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+

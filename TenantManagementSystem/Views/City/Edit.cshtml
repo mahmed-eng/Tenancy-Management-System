@@ -1,0 +1,161 @@
+﻿@model TenantManagementSystem.Models.City
+@{
+    /**/
+
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+<!DOCTYPE html>
+
+<h2>Edit City</h2>
+
+@section styles
+    {
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+}
+<link href="~/Content/BackEnd/css/jqueryUI.css" rel="stylesheet" />
+<br /><br />
+
+
+<section class="wrapper">
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Edit City
+                    </header>
+                    <div class="panel-body">
+                        <div class="position-center">
+                            @using (Html.BeginForm())
+                            {
+
+                                @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Id)
+
+                                @{
+                                    if (ViewBag.Message == null)
+                                    { }
+                                    else
+                                    {
+                                        <div class="alert alert-success" role="alert">
+                                            <strong>@ViewBag.Message</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    }
+                                }
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name)
+
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+
+                                @*<div class="form-group">
+            @Html.LabelFor(model => model.BranchId)
+
+                @Html.EditorFor(model => model.BranchId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompanyId)
+
+                @Html.EditorFor(model => model.CompanyId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+                                @*<div class="form-group">
+            @Html.LabelFor(model => model.Phone)
+
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fax)
+
+                @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cell)
+
+                @Html.EditorFor(model => model.Cell, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cell, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+                                @*<div class="form-group">
+            @Html.LabelFor(model => model.RegisterNumber)
+
+                @Html.EditorFor(model => model.RegisterNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RegisterNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+                                @*<div class="form-group">
+            @Html.LabelFor(model => model.CreatedBy)
+
+                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedDate)
+
+                @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdatedBy)
+
+                @Html.EditorFor(model => model.UpdatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UpdatedBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdatedDate)
+
+                @Html.EditorFor(model => model.UpdatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UpdatedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+                                <button type="submit" class="btn btn-info">Save</button>
+
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div>
+    @Html.ActionLink("Back to List", "ViewCity")
+</div>

@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login | SMS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/BackEnd/images/uni.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="University, Result" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/Content/BackEnd/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/BackEnd/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="~/Content/BackEnd/css/style-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/BackEnd/css/font.css" type="text/css" />
+    <link href="~/Content/BackEnd/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/BackEnd/css/morris.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/BackEnd/css/monthly.css">
+    <script src="~/Content/BackEnd/js/jquery2.0.3.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Content/BackEnd/js/raphael-min.js"></script>
+    <script src="~/Content/BackEnd/js/morris.js"></script>
+    <style>
+        label.error {
+            color: #C04442;
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        #msg {
+            font-size: 12px;
+            font-weight: 300;
+            margin-bottom: 5px;
+        }
+
+        #Emsg {
+            font-size: 12px;
+            font-weight: 300;
+            margin-bottom: 5px;
+        }
+
+        .field-validation-error {
+            color: #C04442;
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        .LoginForm a {
+            font-size: 14px;
+            color: #C04442;
+            text-decoration: none;
+            margin-left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="LoginForm">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Admin LogIn</div>
+                            <div class="panel-body">
+                                @using (Html.BeginForm("Auth", "Admin", FormMethod.Post, new { id = "myForm" }))
+                                {
+                                    <div class="form-group">
+                                        @Html.Label("User Name")
+                                        @Html.TextBox("UserName", null, new { @class = "form-control" })
+                                        @Html.ValidationMessage("UserName")
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Password")
+                                        @Html.Password("Password", null, new { @class = "form-control" })
+                                        @Html.ValidationMessage("Password")
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="@Url.Action("AdminChangePassowrd", "Admin")">Forgot Password</a>
+                                    </div>
+                                    <p id="msg" class="text-success">@ViewBag.Message</p>
+                                    <p id="Emsg" class="text-danger">@ViewBag.EMessage</p>
+                                    <input type="submit" class="btn btn-primary btn-sm" value="LogIn" />
+                                    <a href="@Url.Action("AdminRegister", "Admin")">Register Now</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Content/BackEnd/js/bootstrap.js"></script>
+    <script src="~/Content/BackEnd/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="~/Content/BackEnd/js/scripts.js"></script>
+    <script src="~/Content/BackEnd/js/jquery.slimscroll.js"></script>
+    <script src="~/Content/BackEnd/js/jquery.nicescroll.js"></script>
+    <script src="~/Content/BackEnd/js/jquery.scrollTo.js"></script>
+
+    <script>
+    $().ready(function () {
+
+        $("#myForm").validate({
+            rules: {
+                UserName: "required",
+                Password: "required"
+            },
+            messages: {
+                UserName: "Please Enter User Name",
+                Password: "Please Enter Password"
+            }
+        });
+
+
+    });
+    </script>
+</body>
+</html>

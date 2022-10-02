@@ -1,0 +1,192 @@
+﻿@model TenantManagementSystem.Models.Property
+@{
+    ViewBag.Title = "SaveFlat";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+<!DOCTYPE html>
+
+<h2>Save Flat</h2>
+
+@section styles
+    {
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+
+        .required::after {
+            content: "*";
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+}
+
+<section class="wrapper">
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Save Flat
+                    </header>
+                    <div class="panel-body">
+                        <div class="position-center">
+
+                            @using (Html.BeginForm(null, null, FormMethod.Post))
+                            {
+                                <div class="form-group">
+
+                                    @Html.LabelFor(t => t.BuildingId, new { @class = "required" })
+                                    @Html.DropDownListFor(t => t.BuildingId, new SelectList(ViewBag.Building, "Id", "Name"), "------Select Building------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.BuildingId)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.CityId, new { @class = "required" })
+                                    @*@Html.DropDownListFor(t => t.CityId, new SelectList(ViewBag.City, "Id", "Name"), "------Select City------", new { @class = "form-control" })*@
+                                    @Html.DropDownListFor(t => t.CityId, new SelectList(ViewBag.City, "Id", "Name"), new { @class = "form-control" })
+
+                                    @Html.ValidationMessageFor(t => t.CityId)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.FlatTypeId, new { @class = "required" })
+                                    @Html.DropDownListFor(t => t.FlatTypeId, new SelectList(ViewBag.FlatType, "Id", "FlatTypeDescription"), "------Select Type------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.FlatTypeId)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.FlatNo, new { @class = "required" })
+                                    @Html.TextBoxFor(t => t.FlatNo, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.FlatNo)
+                                </div>
+                                @*<div class="form-group" style="display: none">*@
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Name)
+                                    @Html.TextBoxFor(t => t.Name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Name)
+                                </div>
+
+                                @*<div class="form-group">
+                                        @Html.LabelFor(t => t.FlatTypeDescription)
+                                        @Html.TextBoxFor(t => t.FlatTypeDescription, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(t => t.FlatTypeDescription)
+                                    </div>*@
+
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Address, new { @class = "required" })
+                                    @Html.TextBoxFor(t => t.Address, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Address)
+                                </div>
+
+                                @*<div class="form-group" style="display:none">
+                                        @Html.LabelFor(t => t.CityId)
+                                        @Html.DropDownListFor(t => t.CityId, new SelectList(ViewBag.City, "Id", "Name"), "------Select City------", new { @class = "form-control" })
+
+                                        @Html.ValidationMessageFor(t => t.CityId)
+                                    </div>*@
+
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.AreaId, new { @class = "required" })
+                                    @Html.DropDownListFor(t => t.AreaId, new SelectList(ViewBag.Area, "Id", "Name"), new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.AreaId)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.PropertyNumber)
+                                    @Html.TextBoxFor(t => t.PropertyNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.PropertyNumber)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.BondNumber)
+                                    @Html.TextBoxFor(t => t.BondNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.BondNumber)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.BondType)
+                                    @Html.TextAreaFor(t => t.BondType, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.BondType)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.GovernmentNumber)
+                                    @Html.TextBoxFor(t => t.GovernmentNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.GovernmentNumber)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.PilotNumber)
+                                    @Html.TextBoxFor(t => t.PilotNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.PilotNumber)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Street)
+                                    @Html.TextBoxFor(t => t.Street, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Street)
+                                </div>
+
+                                <button type="submit" class="btn btn-info">Save</button>
+                            }
+                        </div>
+
+                        <br /><br />
+
+                        @{
+                            if (ViewBag.Message == null)
+                            { }
+                            else
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    <strong>@ViewBag.Message</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+    {
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script>
+        document.getElementById('BuildingId').value = '';
+        document.getElementById('Name').value = '';
+        document.getElementById('Address').value = '';
+        document.getElementById('PropertyName').value = '';
+        document.getElementById('PropertyNumber').value = '';
+        document.getElementById('PropertyType').value = '';
+        document.getElementById('BondType').value = '';
+        document.getElementById('AreaId').value = '';
+        document.getElementById('CityId').value = '';
+        document.getElementById('FlatType').value = '';
+        document.getElementById('LessorId').value = '';
+        document.getElementById('BondNumber').value = '';
+        document.getElementById('GovernmentNumber').value = '';
+        document.getElementById('PilotNumber').value = '';
+        document.getElementById('Street').value = '';
+    </script>
+    <script>
+        $().ready(function () {
+            $("#FlatNo").on('change', function () {
+                var flatname = $(this).val();
+
+                $("#Name").val(flatname);
+
+
+
+            });
+
+
+
+
+        });
+    </script>
+}
+
+

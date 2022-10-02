@@ -1,0 +1,222 @@
+﻿
+@{
+    ViewBag.Title = "Tenant Management System";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    @{
+        if (Session["Id"] == null)
+        {
+            Response.Redirect("../Admin/Login");
+        }
+    }
+    <title>@ViewBag.Title | SCMS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/BackEnd/images/uni.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="University, Result" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/Content/BackEnd/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/BackEnd/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="~/Content/BackEnd/css/style-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/BackEnd/css/font.css" type="text/css" />
+    <link href="~/Content/BackEnd/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/BackEnd/css/morris.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/BackEnd/css/monthly.css">
+    <script src="~/Content/BackEnd/js/jquery2.0.3.min.js"></script>
+    <script src="~/Content/BackEnd/js/raphael-min.js"></script>
+    <script src="~/Content/BackEnd/js/morris.js"></script>
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <section id="container">
+        <header class="header fixed-top clearfix">
+            <div class="brand">
+                <a class="logo" href="@Url.Action("Dashboard", "Dashboard")">
+                    TMS
+                </a>
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-bars"></div>
+                </div>
+            </div>
+
+            <div class="top-nav clearfix">
+                <ul class="nav pull-right top-menu">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img src="~/Content/BackEnd/images/Admin.png" />
+                            <span class="username">
+                                @{
+                                    if (Session["Name"] == null) { }
+                                    else
+                                    {
+                                        @Session["Name"].ToString();
+                                    }
+                                }
+                            </span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <li><a href="@Url.Action("Logout", "Admin")"><i class="fa fa-sign-out"></i>Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <aside>
+            <div id="sidebar" class="nav-collapse">
+                <div class="leftside-navigation">
+                    <ul class="sidebar-menu" id="nav-accordion">
+                        <li>
+                            <a href="@Url.Action("Dashboard", "Dashboard")">
+                                <i class="fa fa-dashboard"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        @*<li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-male"></i>
+                                    <span>Company</span>
+                                </a>
+                                <ul class="sub">
+
+                                    <li>@Html.ActionLink("Save", "SaveCompany", "Company")</li>
+                                    <li>@Html.ActionLink("View", "ViewCompany", "Company")</li>
+                                </ul>
+                            </li>*@
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-male"></i>
+                                <span>Agent</span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Save", "SaveAgent", "Agent")</li>
+                                <li>@Html.ActionLink("View", "ViewAgent", "Agent")</li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-male"></i>
+                                <span>Lessor</span>
+                            </a>
+                            <ul class="sub">
+                                <li> @Html.ActionLink("Save", "SaveLessor", "LesseeLessor")</li>
+                                <li> @Html.ActionLink("View", "ViewLessor", "LesseeLessor")</li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-building"></i>
+                                <span>Lessee</span>
+                            </a>
+                            <ul class="sub">
+                                <li> @Html.ActionLink("Save", "SaveLessee", "LesseeLessor")</li>
+                                <li> @Html.ActionLink("View", "ViewLessee", "LesseeLessor")</li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-male"></i>
+                                <span>Building Villas Shops</span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Save", "SaveBuildingVillas", "Property")</li>
+                                <li>@Html.ActionLink("View", "ViewBuildingVillas", "Property")</li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-male"></i>
+                                <span>Flat / Shop</span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Save", "SaveFlat", "Property")</li>
+                                <li>@Html.ActionLink("View", "ViewFlat", "Property")</li>
+                                <li>@Html.ActionLink("Save Shop", "SaveShop", "Property")</li>
+                                <li>@Html.ActionLink("View Shop", "ViewShop", "Property")</li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-male"></i>
+                                <span>Tenancy Agreement</span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Save", "SaveTenancyAgreement", "TenancyAgreement")</li>
+                                <li>@Html.ActionLink("View", "ViewTenancyAgreement", "TenancyAgreement")</li>
+                                <li>@Html.ActionLink("Save Cheque Details", "SaveChequeDetails", "ChequeDetails")</li>
+                                <li>@Html.ActionLink("View Cheque Details", "ViewChequeDetails", "ChequeDetails")</li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-male"></i>
+                                <span>City</span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Save", "SaveCity", "City")</li>
+                                <li>@Html.ActionLink("View", "ViewCity", "City")</li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-male"></i>
+                                <span>Area</span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Save", "SaveArea", "Area")</li>
+                                <li>@Html.ActionLink("View", "ViewArea", "Area")</li>
+                            </ul>
+                        </li>
+
+                        @*<li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-male"></i>
+                                    <span>Branch</span>
+                                </a>
+                                <ul class="sub">
+                                    <li>@Html.ActionLink("Save", "SaveBranch", "Branch")</li>
+                                    <li>@Html.ActionLink("View", "ViewBranch", "Branch")</li>
+                                </ul>
+                            </li>*@
+
+
+                        <li>
+                            <a href="@Url.Action("Logout", "Admin")">
+                                <i class="fa fa-sign-out"></i>
+                                <span>Log Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <section id="main-content">
+
+            @RenderBody()
+
+            <section>
+                <div class="footer">
+                    <div>
+                        <p>&copy; @DateTime.Now.Year SMS. All rights reserved </p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+    </section>
+
+    <script src="~/Content/BackEnd/js/bootstrap.js"></script>
+    <script src="~/Content/BackEnd/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="~/Content/BackEnd/js/scripts.js"></script>
+    <script src="~/Content/BackEnd/js/jquery.slimscroll.js"></script>
+    <script src="~/Content/BackEnd/js/jquery.nicescroll.js"></script>
+    <script src="~/Content/BackEnd/js/jquery.scrollTo.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

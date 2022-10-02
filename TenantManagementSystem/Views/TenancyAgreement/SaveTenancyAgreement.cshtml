@@ -1,0 +1,673 @@
+﻿@model TenantManagementSystem.Models.TenancyAgreement
+@{
+    ViewBag.Title = "Tenancy";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+<!DOCTYPE html>
+
+<h2>Save Tenancy Agreement</h2>
+
+@section styles
+    {
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+
+        .form-group {
+            width: 50%;
+            height: auto;
+        }
+
+        .required::after {
+            content: "*";
+            font-weight: bold;
+            color: red;
+        }
+
+        .tab {
+            position: relative;
+            bottom: 20px;
+            width: 50%;
+            height: auto;
+        }
+
+        #add {
+            border: none;
+            background: none;
+        }
+    </style>
+}
+<link href="~/Content/BackEnd/css/jqueryUI.css" rel="stylesheet" />
+<link href="~/Content/BackEnd/css/jqueryUI.css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<section class="wrapper">
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Save Tenancy Agreement
+                    </header>
+
+                    <div class="panel-body">
+                        <div class="position-center">
+                            @{
+                                if (ViewBag.Message == null)
+                                { }
+                                else
+                                {
+                                    <div class="alert alert-success" role="alert">
+                                        <strong>@ViewBag.Message</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                }
+                            }
+                            @using (Html.BeginForm(null, null, FormMethod.Post))
+                            {
+
+                                @*<div class="form-group" style="display: none;">
+                                        @Html.LabelFor(TenancyAgreement => TenancyAgreement.Id)
+                                        @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.Id, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.Id)
+                                    </div>*@
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.AgreementNumber, new { @class = "required" })
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.AgreementNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.AgreementNumber)
+                                </div>
+
+                                @*<div class="form-group">
+                                        @Html.LabelFor(TenancyAgreement => TenancyAgreement.LessorId)
+                                        @Html.TextAreaFor(TenancyAgreement => TenancyAgreement.LessorId, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.LessorId)
+                                    </div>*@
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.LesseeId, new { @class = "required" })
+                                    @Html.DropDownListFor(TenancyAgreement => TenancyAgreement.LesseeId, new SelectList(ViewBag.Lessee, "Id", "Name"), "------Select Lessee------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.LesseeId)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.LessorId, new { @class = "required" })
+                                    @Html.DropDownListFor(TenancyAgreement => TenancyAgreement.LessorId, new SelectList(ViewBag.Lessor, "Id", "Name"), "------Select Lessor------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.LessorId)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.BuildingId, new { @class = "required" })
+                                    @Html.DropDownListFor(TenancyAgreement => TenancyAgreement.BuildingId, new SelectList("", "Id", "Name"), "------Select Building------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.BuildingId)
+                                </div>
+
+                                @*<div class="form-group">
+                                        @Html.LabelFor(TenancyAgreement => TenancyAgreement.BuildingId, new { @class = "required" })
+                                        @Html.DropDownListFor(TenancyAgreement => TenancyAgreement.BuildingId, new SelectList(ViewBag.Building, "Id", "Name"), "------Select Building------", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.BuildingId)
+                                    </div>*@
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.FlatId, new { @class = "required" })
+                                    @Html.DropDownListFor(TenancyAgreement => TenancyAgreement.FlatId, new SelectList(ViewBag.Flat, "Id", "Name"), "------Select Flat /Shops------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.FlatId)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.StartDate, new { @class = "required" })
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.StartDate, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.StartDate)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.EndDate, new { @class = "required" })
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.EndDate, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.EndDate)
+                                </div>
+
+                                @*<div class="form-group">
+                                        @Html.LabelFor(TenancyAgreement => TenancyAgreement.RentDurationinDays)
+                                        @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.RentDurationinDays, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.RentDurationinDays)
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(TenancyAgreement => TenancyAgreement.RentDurationinMonths)
+                                        @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.RentDurationinMonths, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.RentDurationinMonths)
+                                    </div>*@
+
+                                @*<div class="form-group">
+                                        @Html.LabelFor(TenancyAgreement => TenancyAgreement.MonthlyAmount)
+                                        @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.MonthlyAmount, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.MonthlyAmount)
+                                    </div>*@
+
+
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.TotalAmount, new { @class = "required" })
+                                    @Html.TextBoxFor(TenancyAgreement => TenancyAgreement.TotalAmount, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.TotalAmount)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.IsStarted, new { @class = "checked" })
+                                    @Html.CheckBoxFor(TenancyAgreement => TenancyAgreement.IsStarted, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.IsStarted)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.IsCompleted, new { @class = "required" })
+                                    @Html.CheckBoxFor(TenancyAgreement => TenancyAgreement.IsCompleted, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.IsCompleted)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.IsCancelled, new { @class = "required" })
+                                    @Html.CheckBoxFor(TenancyAgreement => TenancyAgreement.IsCancelled, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(TenancyAgreement => TenancyAgreement.IsCancelled)
+                                </div>
+
+
+                                <button type="submit" class="btn btn-info" id="btn">Save</button>
+                            }
+                        </div>
+
+                        <br /><br />
+
+
+                    </div>
+                    <label for="indexcount">
+                        Payment Count
+                        <input id="indexcount" placeholder="Payment Count" style="border:none">
+                    </label>
+
+            </div>
+            <label for="addvalue">
+                Receive Amount
+                <input id="addvalue" placeholder="Receive Amount" style="border:none">
+            </label>
+            @*<label id="indexcount">Payment Count: </label> <label id="indexcount">0</label>*@
+            @*New table*@
+            <center>
+                <div>
+                    <table id="table" border="1" class="tab">
+
+                        <tr>
+                            <th>Index</th>
+                            <th>ChequeNumber</th>
+                            <th>ChequeDate</th>
+
+                            <th>TenancyAgreementNumber</th>
+                            <th>Amount</th>
+                            <th>PaymentFromCash</th>
+                            <th></th>
+
+                        </tr>
+                        <tr>
+
+                            <td><input type="text" id="index" size="5" placeholder="1"></td>
+                            <td><input type="text" id="chequeNumber" placeholder="Enter Cheque  Number"></td>
+                            <td><input required type="date" id="chequeDate" size="5"></td>
+
+                            <td><input required type="text" id="tenancyagreementno" size="24" placeholder="Enter Tenancy Agreement Number"></td>
+                            <td><input required type="number" id="amount" size="5" placeholder="Enter Amount"></td>
+                            <td><input required type="checkbox" id="check" /></td>
+
+                            <td class="buttons btn btn-primary"> + <input type="button" value="Add Row" id="add" onclick="addRow()"></td>
+
+
+                        </tr>
+
+                    </table>
+                    <input type='button' class="btn btn-primary" id='reset' value='reset' />
+                    @*<button class="btn btn-primary" id="reset">Reset</button>*@
+
+
+                </div>
+            </center>
+
+            @*grids added*@
+
+            @*newtable added*@
+            <style>
+                table {
+                    width: 100%;
+                    margin: 20px 0;
+                    border-collapse: collapse;
+                    background-color: skyblue;
+                }
+
+                table, th, td {
+                    border: 1px solid #cdcdcd;
+                }
+
+                    table th, table td {
+                        padding: 5px;
+                        text-align: left;
+                    }
+            </style>
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+            <script>
+
+            </script>
+
+        </div>
+    </div>
+    </div>
+</section>
+
+
+@section scripts
+    {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/BackEnd/js/jqueryUI.js"></script>
+    <script src="~/Content/BackEnd/js/timepicker.js"></script>
+    <script src="~/Scripts/datepair.js"></script>
+    <script src="~/Scripts/jqdatepair.js"></script>
+    @*<script type="text/javascript" src="js/jquery1.7.2.js"></script>*@
+    @*<script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>*@
+    @*<script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>*@
+
+
+    <script>
+        //document.getElementById('Id').value = '';
+        //document.getElementById('AgreementNumber').value = '';
+        //document.getElementById('LessorId').value = '';
+        //document.getElementById('BuildingId').value = '';
+        //document.getElementById('FlatId').value = '';
+        //document.getElementById('StartDate').value = '';
+        //document.getElementById('EndDate').value = '';
+        //document.getElementById('RentDurationinDays').value = '';
+        //document.getElementById('RentDurationinMonths').value = '';
+        //document.getElementById('MonthlyAmount').value = '';
+        //document.getElementById('TotalAmount').value = '';
+        //document.getElementById('index').focus();
+    </script>
+
+    
+    
+    
+
+
+
+    <script>
+
+
+
+
+        $().ready(function () {
+
+            $("#StartDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy-mm-dd"
+            }).datepicker('setDate', 'today');
+
+            $("#EndDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy-mm-dd",
+            }).datepicker('setDate', 'today');
+            $("#EndDate").datepicker();
+
+            $("#EndDate").on('change', function () {
+                var date = Date.parse($(this).val());
+                if (date < Date.now()) {
+                    alert('Selected date must be greater than today date');
+                    $(this).val('');
+                }
+                var start = $("#StartDate").datepicker("getDate");
+                var end = $("#EndDate").datepicker("getDate");
+                days = (end - start) / (1000 * 60 * 60 * 24);
+                //alert(Math.round(days));
+                $("#RentDurationinDays").val(Math.round(days));
+                $("#RentDurationinMonths").val(Math.round(days / 30));
+            });
+
+            $("#MonthlyAmount").on('change', function () {
+                var monthlyAmount = Number.parseFloat($(this).val());
+                var rentDurationinMonths = Number.parseFloat($("#RentDurationinMonths").val());
+
+                $("#TotalAmount").val(Math.round(monthlyAmount * rentDurationinMonths));
+            });
+
+            $("#AgreementNumber").on('change', function () {
+                var agreementNumber = $(this).val();
+                $("#tenancyagreementno").val(agreementNumber);
+
+            });
+
+
+
+
+        });
+
+
+    
+
+       //Reset function
+
+        //$().ready(function () {
+        //    $('#resetbutton').click(function () {
+        //        $('#AgreementNumber')[0].reset();
+        //    });
+        //});
+
+        //$(document).ready(function () {
+        //    $("#resetbutton").on("click", function () {
+        //        $('.form-group').find('.form-group').each(function (index, element) {
+        //           // $(this).html($(this).data('default'));
+        //        });
+        //    });
+        //});
+
+
+
+
+
+        //Newtable Scripts
+        function addRow() {
+           // Index count
+
+
+
+            var indexCount = Math.round($("#indexcount").val()) + 1;
+
+            $("#indexcount").val(indexCount);
+
+         
+
+            let newIndex = event.target.parentNode.parentNode.children[0].children[0],
+                newChequeNumber = event.target.parentNode.parentNode.children[1].children[0],
+                newChequeDate = event.target.parentNode.parentNode.children[2].children[0],
+                newTenancyAgreementNumber = event.target.parentNode.parentNode.children[3].children[0],
+                newAmount = event.target.parentNode.parentNode.children[4].children[0],
+                newPaymentFromCash = event.target.parentNode.parentNode.children[5].children[0],
+                table = document.getElementById('table'),
+                tableLength = (table.rows.length) - 1;
+
+
+            if ($("#addvalue").val() == "") {
+                $("#addvalue").val(0);
+            }
+
+            var recAmount = Number.parseFloat($("#addvalue").val()) + Number.parseFloat(newAmount.valueAsNumber);
+            var totalamount = Number.parseFloat($("#TotalAmount").val());
+            //var amount = $("#amount").val();
+            if (recAmount > totalamount) {
+                alert("Cannot be greater than Agreement amount");
+                return false;
+            }
+            else {
+                $("#addvalue").val(recAmount);
+
+            }
+
+           
+            table.insertRow(tableLength).outerHTML = `<tr><td>${indexCount}</td><td>${newChequeNumber.value}</td><td>${newChequeDate.value}</td><td>${$("#AgreementNumber").val()}</td><td>${newAmount.value}</td><td class='buttons'><input type='button' value='Edit' class='edit' onclick='editRow()'><input type='button' value='Save' class='save' onclick='saveRow()'><input type='button' value='Delete' class='del' onclick='deleteRow()'></td></tr>`;
+
+
+
+
+
+             var chequeDetail = {};
+            chequeDetail.chequeNumber = newChequeNumber.value;
+            chequeDetail.chequeDate = newChequeDate.value;
+            chequeDetail.TenantAgreementNumber = $("#AgreementNumber").val();
+            chequeDetail.amount = newAmount.value;
+
+            if (newPaymentFromCash.value=="on")
+                chequeDetail.PaymentFromCash = 1;
+            else
+                chequeDetail.PaymentFromCash = 0;
+
+
+            if ( $('#check').is(":checked"))
+                chequeDetail.PaymentFromCash = 1;
+            else
+                chequeDetail.PaymentFromCash = 0;
+
+            var json = { aChequeDetails: chequeDetail };
+              $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveChequeDetails", "ChequeDetails")',
+                    contentType: "application/json; charset=utf-8",
+                  data: JSON.stringify(chequeDetail),
+                    success: function (ChequeDetails) {
+
+                    }
+            });
+
+
+
+            newIndex.value = '';
+            newChequeNumber.value = '';
+            newChequeDate.value = '';
+            newTenancyAgreementNumber.value = '';
+            newAmount.value = '';
+            newPaymentFromCash.value = "off";
+            document.getElementById('index').focus();
+        }
+
+        function editRow() {
+            let index = event.target.parentNode.parentNode.children[0],
+            chequeNumber = event.target.parentNode.parentNode.children[1],
+            chequeDate = event.target.parentNode.parentNode.children[2];
+            tenancyagreementno = event.target.parentNode.parentNode.children[3];
+            amount = event.target.parentNode.parentNode.children[4];
+            check = event.target.parentNode.parentNode.children[5];
+            index.innerHTML = `<input type="text" size="5" value="${index.innerHTML}">`;
+            chequeNumber.innerHTML = `<input type="text" value="${chequeNumber.innerHTML}">`;
+            chequeDate.innerHTML = `<input type="date" size="5" value="${chequeDate.innerHTML}">`;
+            tenancyagreementno.innerHTML = `<input type="text" size="24" value="${tenancyagreementno.innerHTML}">`;
+            amount.innerHTML = `<input type="number" size="5" value="${amount.innerHTML}">`;
+            check.innerHTML = `<input type="checkbox" value="${check.innerHTML}">`;
+            index.children[0].focus();
+            event.target.style.display = 'none';
+            event.target.nextSibling.style.display = 'inline';
+            //if ($("#AgreementNumber") == 0) {
+            //    alert('Agreement Number has Inserted!');
+            //}
+            //else {
+
+            //    alert('First Create Agreement Number');
+
+            //}
+        }
+
+        function saveRow() {
+            let index = event.target.parentNode.parentNode.children[0],
+                chequeNumber = event.target.parentNode.parentNode.children[1],
+                chequeDate = event.target.parentNode.parentNode.children[2];
+            tenancyagreementno = event.target.parentNode.parentNode.children[3];
+            amount = event.target.parentNode.parentNode.children[4];
+            PaymentFromCash = event.target.parentNode.parentNode.children[5];
+            index.innerHTML = index.children[0].value;
+            chequeNumber.innerHTML = chequeNumber.children[0].value;
+            chequeDate.innerHTML = chequeDate.children[0].value;
+            tenancyagreementno.innerHTML = tenancyagreementno.children[0].value;
+            amount.innerHTML = amount.children[0].value;
+            check.innerHTML = check.children[0].value;
+            event.target.previousSibling.style.display = 'inline';
+            event.target.style.display = 'none';
+            document.getElementById('index').focus();
+        }
+
+        function deleteRow() {
+            //let index = event.target.parentNode.parentNode.children[0],
+            //    chequeNumber = event.deleteRow.target.parentNode.parentNode.children[1],
+            //    chequeDate = event.deleteRow.target.parentNode.parentNode.children[2];
+            //tenancyagreementno = event.deleteRow.target.parentNode.parentNode.children[3];
+            //amount = event.deleteRow.target.parentNode.parentNode.children[4];
+            //index.innerHTML = index.remove.children[0];
+            //chequeNumber.innerHTML = chequeNumber.remove.children[0];
+            //chequeDate.innerHTML = chequeDate.remove.children[0];
+            //tenancyagreementno.innerHTML = tenancyagreementno.remove.children[0];
+            //amount.innerHTML = amount.remove.children[0];
+            //event.target.previousSibling.style.display = 'inline';
+            //extra added above
+           
+                //$("#index").removeData();
+               // $("#table").removeData();
+                //$("#chequeNumber").remove();
+                //$("#chequeDate").remove();
+                //$("#tenancyagreementno").remove();
+                //$("#amount").remove();
+                //$("#check").remove();
+           
+
+
+            //$('#myTableRow').remove();
+            var indexCount = Math.round($("#indexcount").val()) - 1;
+
+            $("#indexcount").val(indexCount);
+
+           
+
+
+
+
+
+
+            //receive amount
+            //var recAmount = ($("#addvalue").val()) - ($("#addvalue").val());
+
+            //$("#addvalue").val(recAmount);
+
+
+
+            event.target.parentNode.parentNode.style.display = 'none';
+            document.getElementById('index').focus();
+           
+           
+        }
+
+       
+         
+
+            //});
+       
+        $(":checkbox").on("change", function () {
+            var chx = $(this).is(':checked');
+            $(this).closest('tr').find('input:text, select').prop("disabled", chx);
+        });
+        //$("input:checkbox[name^='disableRow']").on("click", function () {
+        //    $("table tr input:text, table tr select").prop("disabled", this.checked);
+        //});
+        //$("#add").click(function () {
+
+        //    if ($("#AgreementNumber") == 0) {
+        //        alert('Agreement Number has Inserted!');
+        //}
+        //    else {
+
+        //        alert('First Create Agreement Number');
+
+        //    }
+        //});
+
+        //$(document).ready(function () {
+
+        //});
+
+        //form validation
+
+        //Select Property by lessorId
+        //$(".del").click(function () {
+        //    document.getElementById("#index").remove();
+        //    document.getElementById("#chequeDate").remove();
+        //    document.getElementById("#chequeDate").remove();
+        //    document.getElementById("#tenancyagreementno").remove();
+        //    document.getElementById("#amount").remove();
+        //    document.getElementById("#check").remove();
+
+
+        //});
+
+
+        $(document).ready(function () {
+            $("#LessorId").change(function () {
+                var LessorId = $("#LessorId").val();
+                $("#BuildingId").empty();
+                var json = { lessorId: LessorId };
+                var TName = null;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SelectBuildingsByLessorId", "TenancyAgreement")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (propertyList) {
+                        $("#BuildingId").append('<option value=' + "" + '>' + "------Select Building------" + '</option>');
+                        $.each(propertyList, function (key, value) {
+                            $("#BuildingId").append('<option value=' + value.Id + '>' + value.Name + '</option>');
+
+                        });
+                    }
+                });
+            });
+            //Select Flats by BuildingId
+             $(document).ready(function () {
+                 $("#BuildingId").change(function () {
+                 var BuildingId = $("#BuildingId").val();
+                $("#FlatId").empty();
+                var json = { buildingId: BuildingId };
+                var TName = null;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SelectFlatByBuildingId", "TenancyAgreement")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (propertyList) {
+                        $("#FlatId").append('<option value=' + "" + '>' + "------Select Flats------" + '</option>');
+                        $.each(propertyList, function (key, value) {
+                            $("#FlatId").append('<option value=' + value.FlatId + '>' + value.FlatNo + '</option>');
+
+                        });
+                    }
+                });
+            });
+
+
+
+
+                 $(document).ready(function () {
+                 jQuery('#reset').click(function () {
+                     $(':input', '#table')
+                         .not(':button, :submit, :reset, :hidden')
+                         .val('')
+                         .removeAttr('checked')
+                         .removeAttr('selected');
+                     });
+
+                     $(document).ready(function () {
+                         jQuery('#reset').click(function () {
+                             $(':input', '.form-group')
+                                 .not(':button, :submit, :reset, :hidden')
+                                 .val('')
+                                 .removeAttr('checked')
+                                 .removeAttr('selected');
+                         });
+                     });
+                     });
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+}

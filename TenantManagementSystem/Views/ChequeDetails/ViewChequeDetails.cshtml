@@ -1,0 +1,106 @@
+﻿@model  IEnumerable<TenantManagementSystem.Models.ChequeDetails>
+@{
+    ViewBag.Title = "ChequeDetails";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+<h2>View Cheque Details</h2>
+
+<!DOCTYPE html>
+<br /><br /><br /><br /><br />
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title></title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "SaveChequeDetails")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ChequeNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenantAgreementNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCashed)
+            </th>
+            <th>
+                Cheque Date Detail
+            </th>
+
+            <th>
+                Created Date Detail
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentFromCash)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChequeNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenantAgreementNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCashed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChequeDateDetail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDateDetail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentFromCash)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+
+                </td>
+                <td></td>
+            </tr>
+            //newly added
+            @*@foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BranchId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompanyId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AgreementNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LessorId)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>*@
+        }
+
+    </table>
+</body>
+</html>
+

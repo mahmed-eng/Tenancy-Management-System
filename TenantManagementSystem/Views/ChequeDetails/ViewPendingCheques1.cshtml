@@ -1,0 +1,210 @@
+﻿@model TenantManagementSystem.Models.ChequeDetails
+@{
+    ViewBag.Title = "View Pending Cheques";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+@section styles
+{
+    <style>
+        .bg-table {
+            background: #01687A;
+        }
+    </style>
+}
+
+
+
+<section class="wrapper">
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        View Property Details
+                    </header>
+                    <div class="panel-body">
+                        <div class="position-center">
+
+
+                            @using (Html.BeginForm(null, null, FormMethod.Post))
+                            {
+
+                                <div class="form-group">
+                                    @Html.LabelFor(c => c.LessorId)
+                                    @Html.DropDownListFor(c => c.LessorId, new SelectList(ViewBag.Lessor, "Id", "Name"), "------Select Lessor------", new { @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    @*@Html.LabelFor(ChequeDetails => ChequeDetails.FromDate)*@
+                                    <br />
+                                    @*@Html.TextBoxFor(ChequeDetails => ChequeDetails.FromDate, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(ChequeDetails => ChequeDetails.FromDate)*@
+                                    From Date <input required type="date" id="FromDate" size="5">
+                                </div>
+                                <div class="form-group">
+                                    @*@Html.LabelFor(ChequeDetails => ChequeDetails.ToDate)*@
+                                    <br />
+                                    @*@Html.TextBoxFor(ChequeDetails => ChequeDetails.ToDate, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(ChequeDetails => ChequeDetails.ToDate)*@
+                                    To Date <input required type="date" id="ToDate" size="5">
+                                </div>
+                                @*<div class="form-group">
+                                        @Html.LabelFor(ChequeDetails => ChequeDetails.PendingCheque)
+                                        @Html.CheckBoxFor(ChequeDetails => ChequeDetails.PendingCheque, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(ChequeDetails => ChequeDetails.PendingCheque)
+                                    </div>*@
+                                <div class="form-group">
+                                    <input required type="checkbox" id="PendingCheque" size="5" checked="checked"> Pending Cheque
+                                </div>
+                                <br />
+                                <button type="submit" class="btn btn-info" id="btnShowresult">Show Result</button>
+                                <br /><br />
+                            }
+
+                            <div class="col-md-10 col-md-pull-2">
+                                <table class="table table-responsive table-striped" id="ViewCheques">
+                                    <thead>
+                                        <tr class="bg-table">
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.LessorName)
+                                            </th>
+                                            @*<th>
+                                                    @Html.DisplayNameFor(model => model.FromDate)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.ToDate)
+                                                </th>*@
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.TenantAgreementNumber)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Amount)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.ChequeDateDetail)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.IsCashed)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.PaymentFromCash)
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="chequedetails"></tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                </section>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>*@
+    @*<script src="~/Scripts/jquery.validate.js"></script>*@
+    @*<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
+    @*<script src="~/Content/BackEnd/js/jqueryUI.js"></script>
+    <script src="~/Content/BackEnd/js/timepicker.js"></script>
+    <script src="~/Scripts/datepair.js"></script>
+    <script src="~/Scripts/jqdatepair.js"></script>*@
+
+    <script>
+
+        $().ready(function () {
+
+            //$("#FromDate").datepicker({
+            //    changeMonth: true,
+            //    changeYear: true,
+            //    dateFormat: "yy-mm-dd"
+            //}).datepicker('setDate', 'today');
+            //$("#FromDate").datepicker();
+
+            //$("#ToDate").datepicker({
+            //    changeMonth: true,
+            //    changeYear: true,
+            //    dateFormat: "yy-mm-dd",
+            //}).datepicker('setDate', 'today');
+            //$("#ToDate").datepicker();
+
+            //$("#ToDate").on('change', function () {
+            //    var date = Date.parse($(this).val());
+            //    var from = $("#FromDate").datepicker("getDate");
+
+            //    if (date < from) {
+            //        alert('Selected date must be greater than from date');
+            //        $(this).val('');
+            //    }
+
+
+            //});
+
+            //$("#MonthlyAmount").on('change', function () {
+            //    var monthlyAmount = Number.parseFloat($(this).val());
+            //    var rentDurationinMonths = Number.parseFloat($("#RentDurationinMonths").val());
+
+            //    $("#TotalAmount").val(Math.round(monthlyAmount * rentDurationinMonths));
+            //});
+
+            //$("#AgreementNumber").on('change', function () {
+            //    var agreementNumber = $(this).val();
+            //    $("#tenancyagreementno").val(agreementNumber);
+
+            //});
+
+        });
+
+
+        $(document).ready(function () {
+            $("#btnShowresult").click(function () {
+                var lessorId = $("#LessorId").val();
+                //var fromDate = Date.parse($("#FromDate").val());
+                //var toDate = Date.parse($("#ToDate").val());
+                var fromDate = $("#FromDate").val();
+                var toDate = $("#ToDate").val();
+                var pendingCheque = 0;
+                if ($('#PendingCheque').is(":checked"))
+                    pendingCheque = 1;
+                else
+                    pendingCheque= 0;
+                //var pendingCheque = Bool.parse($("#PendingCheque").val());
+                $("#chequedetails").empty();
+                var json = { LessorId: lessorId, FromDate: fromDate, ToDate: toDate, pendingcheques: pendingCheque };
+            var TName = null;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ViewPendingCheques", "ChequeDetails")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                success: function (chequelist) {
+                    for (var i = 0; i < chequelist.length; i++) {
+
+                        $("#ViewCheques").find('tbody').append(
+                            '<tr> ' +
+                            '<td>' + chequelist[i].LessorName + '</td>' +
+                            //'<td>' + chequelist[i].FromDate + '</td>' +
+                            //'<td>' + chequelist[i].ToDate + '</td>' +
+                            '<td>' + chequelist[i].TenantAgreementNumber + '</td>' +
+                            '<td>' + chequelist[i].Amount + '</td>' +
+                            '<td>' + chequelist[i].ChequeDateDetail + '</td>' +
+                            '<td>' + chequelist[i].IsCashed + '</td>' +
+                            '<td>' + chequelist[i].PaymentFromCash + '</td>' +
+                            '</tr > ');
+
+
+                    }
+                }
+            });
+        });
+
+    });
+
+    </script>
+}
+

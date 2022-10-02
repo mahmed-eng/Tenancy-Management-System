@@ -1,0 +1,86 @@
+﻿@model IEnumerable<TenantManagementSystem.Models.Company>
+@{
+    ViewBag.Title = "ViewCompany";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+<h2>ViewCompany</h2>
+
+<!DOCTYPE html>
+<br /><br /><br /><br /><br />
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>View</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cell)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegisterNumber)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cell)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegisterNumber)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CompanyId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CompanyId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CompanyId })
+                    @*@Html.ActionLink("Edit", "Edit", "Company", new { id = item.CompanyId, }, null)*@
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.CompanyId }, new { id = "CompanyId" })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
+

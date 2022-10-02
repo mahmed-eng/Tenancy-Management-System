@@ -1,0 +1,134 @@
+﻿@model TenantManagementSystem.Models.Agent
+@{
+    /**/
+
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+<!DOCTYPE html>
+
+@*<h2>Edit Agent</h2>*@
+
+@section styles
+    {
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+
+        /*.form-group {
+            width: 50%;
+            height: auto;
+            text-align: center;
+        }*/
+    </style>
+}
+<link href="~/Content/BackEnd/css/jqueryUI.css" rel="stylesheet" />
+
+<section class="wrapper">
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel">
+                    <header class="panel-heading">
+                        Edit Agent
+                    </header>
+                    <div class="panel-body">
+                        <div class="position-center">
+                            @{
+                                if (ViewBag.Message == null)
+                                { }
+                                else
+                                {
+                                    <div class="alert alert-success" role="alert">
+                                        <strong>@ViewBag.Message</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                }
+                            }
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.Id)
+
+                                    @*<div class="form-group">
+                                            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>*@
+
+
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+                                        @Html.LabelFor(model => model.Name)
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Address)
+
+                                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Email)
+
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Phone)
+
+                                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Fax)
+
+                                        @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Cell)
+
+                                        @Html.EditorFor(model => model.Cell, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Cell, "", new { @class = "text-danger" })
+
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-info">Save</button>
+
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div>
+    @Html.ActionLink("Back to List", "ViewLessee")
+</div>

@@ -1,0 +1,148 @@
+﻿@model TenantManagementSystem.Models.Property
+@{
+    ViewBag.Title = "View Property Details";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+@section styles
+{
+    <style>
+        .bg-table {
+            background: #01687A;
+        }
+    </style>
+}
+
+<section class="wrapper">
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        View Property Details
+                    </header>
+                    <div class="panel-body">
+                        <div class="position-center">
+
+
+                            @using (Html.BeginForm(null, null, FormMethod.Post))
+                            {
+
+                                <div class="form-group">
+                                    @Html.LabelFor(c => c.PropertyType)
+                                    @Html.DropDownListFor(c => c.PropertyType, new SelectList(ViewBag.PropertyType, "Id", "PropertyTypeDescription"), "------Select Type Description------", new { @class = "form-control" })
+                                </div>
+                            }
+
+                        </div>
+
+                        <div class="col-md-10 col-md-offset-1">
+                            <table class="table table-responsive table-striped" id="viewProperty">
+                                <thead>
+                                    <tr class="bg-table">
+                                        @*
+                                            <th>Code</th>
+                                            <th>Name/Title</th>
+                                            <th>Semester</th>
+                                            <th>Assigned To</th>*@
+
+                                        <th>Name</th>
+                                        <th>AreaName</th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CityName)
+                                        </th>
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.LessorName)
+                                        </th>
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.BuildingName)
+                                        </th>
+
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FlatTypeName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PropertyTypeName)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="property"></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+    $(document).ready(function () {
+        $("#PropertyType").change(function () {
+            var propertyTypeId = $("#PropertyType").val();
+            $("#property").empty();
+            var json = { Id: propertyTypeId };
+            var TName = null;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ViewPropertyBySelection", "Property")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                success: function (property) {
+                    for (var i = 0; i < property.length; i++) {
+
+                        $("#viewProperty").find('tbody').append(
+                            '<tr><td>' + property[i].Name + '</td>' +
+                            '<td>' + property[i].AreaName + '</td>' +
+                            '<td>' + property[i].CityName + '</td>' +
+                            '<td>' + property[i].LessorName + '</td>' +
+                            '<td>' + property[i].BuildingName + '</td>' +
+                            '<td>' + property[i].FlatTypeName + '</td>' +
+                            '<td>' + property[i].PropertyTypeName + '</td>' +
+                            '<td>' + TName + '</td></tr>');
+                    }
+                }
+            });
+        });
+
+
+        $("#DeptId").change(function () {
+            var departmentId = $("#DeptId").val();
+            $("#courses").empty();
+            var json = { Id: departmentId };
+            var TName = null;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCourseByDepartmentId", "Course")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                success: function (courses) {
+                    for (var i = 0; i < courses.length; i++) {
+                        if (courses[i].Status === "True") {
+                            TName = courses[i].TeacherName;
+                        } else {
+                            TName = 'Not Assigned Yet';
+                        }
+                        $("#viewCourse").find('tbody').append(
+                            '<tr><td>' + courses[i].CourseCode + '</td>' +
+                            '<td>' + courses[i].CourseName + '</td>' +
+                            '<td>' + courses[i].SemesterName + '</td>' +
+                            '<td>' + TName + '</td></tr>');
+                    }
+                }
+            });
+        });
+    });
+
+
+    </script>
+}
+

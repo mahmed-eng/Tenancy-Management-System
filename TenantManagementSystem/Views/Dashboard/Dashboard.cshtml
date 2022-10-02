@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+<h2>Dashboard</h2>
+
+<section class="wrapper">
+    @*<div class="col-md-3 market-update-gd">
+            <div class="market-update-block clr-block-2">
+                <div class="col-md-4 market-update-right icon">
+                    <i class="fa fa-user"> </i>
+                </div>
+                <div class="col-md-8 market-update-left" onclick="window.open('@Url.Action("ViewProperty", "Property", new { target="_blank" })')">
+                    <h4>All Property</h4>
+                    <h3>@ViewBag.Flat</h3>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="col-md-3 market-update-gd">
+            <div class="market-update-block clr-block-2">
+                <div class="col-md-4 market-update-right icon">
+                    <i class="fa fa-user"> </i>
+                </div>
+                <div class="col-md-8 market-update-left" onclick="window.open('@Url.Action("ViewPropertyBySelection", "Property", new { target="_blank" })')">
+                    <h4>Property By Property Type</h4>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>*@
+
+    <div class="col-md-3 market-update-gd">
+        <div class="market-update-block clr-block-1">
+            <div class="col-md-4 market-update-right icon">
+                <i class="fa fa-male"></i>
+            </div>
+            <div class="col-md-8 market-update-left" onclick="window.open('@Url.Action("ViewPropertyBySelectionUO", "Property", new { target="_blank" })')">
+                <h4>Un Occupied Property</h4>
+                <h3>@ViewBag.UOP</h3>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 market-update-gd">
+        <div class="market-update-block clr-block-1">
+            <div class="col-md-4 market-update-right icon">
+                <i class="fa fa-male"></i>
+            </div>
+            <div class="col-md-8 market-update-left" onclick="window.open('@Url.Action("ViewPropertyBySelectionO", "Property", new { target="_blank" })')">
+                <h4>Occupied Property</h4>
+                <h3>@ViewBag.OP</h3>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-3 market-update-gd">
+        <div class="market-update-block clr-block-3">
+            <div class="col-md-4 market-update-right icon">
+                <i class="fa fa-list-alt"></i>
+            </div>
+            <div class="col-md-8 market-update-left" onclick="window.open('@Url.Action("ViewPendingCheques", "ChequeDetails", new { target="_blank" })')">
+                <h4>Pending Cheques</h4>
+                <h3>@ViewBag.PendingCheques</h3>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="col-md-3 market-update-gd">
+        <div class="market-update-block clr-block-3">
+            <div class="col-md-4 market-update-right icon">
+                <i class="fa fa-list-alt"></i>
+            </div>
+            <div class="col-md-8 market-update-left" onclick="window.open('@Url.Action("ViewRenewalTenancyAgreement", "TenancyAgreement", new { target="_blank" })')">
+                <h4>Renewal Property</h4>
+                <h3>@ViewBag.RenewalProperty</h3>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    @*<div class="col-md-3 market-update-gd">
+            <div class="market-update-block clr-block-3">
+                <div class="col-md-4 market-update-right icon">
+                    <i class="fa fa-list-alt"></i>
+                </div>
+                <div class="col-md-8 market-update-left">
+                    <h4>Branch</h4>
+                    <h3>@ViewBag.Branch</h3>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>*@
+
+
+
+
+    <div class="clearfix"> </div>
+    <!-- tasks -->
+    @*<div>
+        <div class="col-md-12">
+            <div class="agile-last-grid">
+                <div class="area-grids-heading">
+                    <h3>Tenancy Statistics</h3>
+                </div>
+                <div id="graph8"></div>
+                <script type="text/javascript">
+
+                    var dept_data = [];*@
+
+    @*@foreach (var data in ViewBag.Chart)
+        {
+            <text>
+                var a = "@data.DeptCode";
+                dept_data.push({ "dept": a, "student": @data.TotalStudent });
+            </text>
+        }*@
+
+
+    @*Morris.Bar({
+                            element: 'graph8',
+                            data: dept_data,
+                            xkey: 'dept',
+                            ykeys: ['student'],
+                            labels: ['Total Student'],
+                            xLabelAngle: 0
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>*@
+</section>

@@ -1,0 +1,169 @@
+﻿@model TenantManagementSystem.Models.LesseeLessor
+@{
+    ViewBag.Title = "SaveLessee";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+<h2>SaveLessee</h2>
+
+@section styles
+{
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+
+        .required::after {
+            content: "*";
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+}
+
+<section class="wrapper">
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Save Lessee
+                    </header>
+                    <div class="panel-body">
+                        <div class="position-center">
+                            @{
+                                if (ViewBag.Message == null)
+                                { }
+                                else
+                                {
+                                    <div class="alert alert-success" role="alert">
+                                        <strong>@ViewBag.Message</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                }
+                            }
+                            @using (Html.BeginForm(null, null, FormMethod.Post))
+                            {
+
+                                <div class="form-group" style="display:none">
+                                    @Html.LabelFor(t => t.CompanyId, new { @class = "required" })
+                                    @Html.DropDownListFor(t => t.CompanyId, new SelectList(ViewBag.Company, "CompanyId", "Name"), "------Select Company------", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.CompanyId)
+                                </div>
+                                <div class="form-group" style="display:none">
+                                    @Html.LabelFor(t => t.BranchId, new { @class = "required" })
+                                    @Html.DropDownListFor(t => t.BranchId, new SelectList(ViewBag.Branch, "BranchId", "Name"), "------Select Branch------", new { @class = "form-control" })
+
+                                    @Html.ValidationMessageFor(t => t.BranchId)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CardNumber, new { @class = "required" })
+                                    @Html.TextBoxFor(t => t.CardNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CardNumber)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Name, new { @class = "required" })
+                                    @Html.TextBoxFor(t => t.Name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Name)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Cell, new { @class = "required" })
+                                    @Html.TextBoxFor(t => t.Cell, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Cell)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Email)
+                                    @Html.TextBoxFor(t => t.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Email)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Peneficiary)
+                                    @Html.TextBoxFor(t => t.Peneficiary, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Peneficiary)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Profession)
+                                    @Html.TextBoxFor(t => t.Profession, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Profession)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Address)
+                                    @Html.TextAreaFor(t => t.Address, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Address)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Fax)
+                                    @Html.TextBoxFor(t => t.Fax, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Fax)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.Phone)
+                                    @Html.TextBoxFor(t => t.Phone, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.Phone)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(t => t.POBox)
+                                    @Html.TextBoxFor(t => t.POBox, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.POBox)
+                                </div>
+                                <div class="form-group" style="display:none">
+                                    @Html.LabelFor(t => t.NOPR)
+                                    @Html.TextBoxFor(t => t.NOPR, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(t => t.NOPR)
+                                </div>
+
+
+                                <button type="submit" class="btn btn-info">Save</button>
+                            }
+                        </div>
+
+                        @*<br /><br />
+
+                            @{
+                                if (ViewBag.Message == null)
+                                { }
+                                else
+                                {
+                                    <div class="alert alert-success" role="alert">
+                                        <strong>@ViewBag.Message</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                }
+                            }*@
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script>
+        document.getElementById('CardNumber').value = '';
+        document.getElementById('Name').value = '';
+        document.getElementById('Cell').value = '';
+        document.getElementById('Email').value = '';
+        document.getElementById('Peneficiary').value = '';
+        document.getElementById('Profession').value = '';
+        document.getElementById('Address').value = '';
+        document.getElementById('Fax').value = '';
+        document.getElementById('Phone').value = '';
+        document.getElementById('POBox').value = '';
+        document.getElementById('NOPR').value = '';
+
+    </script>
+
+}

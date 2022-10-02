@@ -1,0 +1,99 @@
+﻿@model TenantManagementSystem.Models.ChequeDetails
+@{
+    /**/
+
+    ViewBag.Title = "CheckDetails";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+
+<!DOCTYPE html>
+
+<h2>Edit Checque Details</h2>
+
+@section styles
+    {
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+}
+<link href="~/Content/BackEnd/css/jqueryUI.css" rel="stylesheet" />
+<br /><br />
+
+@{
+    if (ViewBag.Message == null)
+    { }
+    else
+    {
+        <div class="alert alert-success" role="alert">
+            <strong>@ViewBag.Message</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+<section class="wrapper">
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Save Cheque Details
+                    </header>
+                    <div class="panel-body">
+                        <div class="position-center">
+
+                            @using (Html.BeginForm(null, null, FormMethod.Post))
+                            {
+
+                                <div class="form-group">
+                                    @Html.LabelFor(ChequeDetails => ChequeDetails.ChequeNumber)
+                                    @Html.TextBoxFor(ChequeDetails => ChequeDetails.ChequeNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(ChequeDetails => ChequeDetails.ChequeNumber)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(ChequeDetails => ChequeDetails.TenantAgreementNumber)
+                                    @Html.TextBoxFor(ChequeDetails => ChequeDetails.TenantAgreementNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(ChequeDetails => ChequeDetails.TenantAgreementNumber)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(ChequeDetails => ChequeDetails.Amount)
+                                    @Html.TextBoxFor(ChequeDetails => ChequeDetails.Amount, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(ChequeDetails => ChequeDetails.Amount)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(ChequeDetails => ChequeDetails.IsCashed)
+                                    @Html.CheckBoxFor(ChequeDetails => ChequeDetails.IsCashed, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(ChequeDetails => ChequeDetails.IsCashed)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(ChequeDetails => ChequeDetails.ChequeDate)
+                                    @Html.TextBoxFor(ChequeDetails => ChequeDetails.ChequeDate, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(ChequeDetails => ChequeDetails.ChequeDate)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(ChequeDetails => ChequeDetails.PaymentFromCash)
+                                    @Html.CheckBoxFor(ChequeDetails => ChequeDetails.PaymentFromCash, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(ChequeDetails => ChequeDetails.PaymentFromCash)
+                                </div>
+
+                                <button type="submit" class="btn btn-info">Save</button>
+                            }
+                        </div>
+
+                    </div>
+                </section>
+                <div>
+                    @Html.ActionLink("Back to List", "ViewChequeDetails")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

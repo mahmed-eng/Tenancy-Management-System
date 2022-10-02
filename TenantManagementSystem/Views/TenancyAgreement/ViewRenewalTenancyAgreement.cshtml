@@ -1,0 +1,256 @@
+﻿@model TenantManagementSystem.Models.TenancyAgreement
+@{
+    ViewBag.Title = "View Tenancy Agreement";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+<script src="~/Content/FileSaver.js"></script> @*could be downloaded from https://github.com/eligrey/FileSaver.js/blob/master/src/FileSaver.js*@
+<script>
+    function fnExcelReport(id, name) {
+        var tab_text = '<html xmlns: x="urn:schemas-microsoft-com:office:excel">';
+        tab_text = tab_text + '<head><xml><x: ExcelWorkbook><x: ExcelWorksheets><x: ExcelWorksheet>';
+        tab_text = tab_text + '<x: Name>Test Sheet</x: Name>';
+        tab_text = tab_text + '<x: WorksheetOptions><x: Panes></x: Panes></x: WorksheetOptions ></x: ExcelWorksheet > ';
+        tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+        tab_text = tab_text + "<table border='1px' style='color:black'>";
+
+
+        var exportTable = $('#' + id).clone();
+        //exportTable.find('th').last().remove();
+        exportTable.find('input').each(function (index, elem) { $(elem).remove(); });
+        exportTable.find('a').each(function (index, elem) { $(elem).remove(); });
+
+        tab_text = tab_text + exportTable.html();
+        tab_text = tab_text + '</table></body></html>';
+        var fileName = "Demo" + '.xls';
+
+        //Save the file
+        var blob = new Blob([tab_text], { type: "application/vnd.ms-excel;charset=utf-8" })
+        window.saveAs(blob, fileName);
+    }
+</script>
+
+@section styles
+{
+    <style>
+        .bg-table {
+            background: #01687A;
+        }
+    </style>
+}
+
+<section class="wrapper">
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        View Tenancy Agreement
+                    </header>
+                    <div class="panel-body">
+                        <div class="position-center">
+
+
+                            @using (Html.BeginForm(null, null, FormMethod.Post))
+                            {
+
+
+                                <div class="form-group">
+                                    @*@Html.LabelFor(ChequeDetails => ChequeDetails.StartDate)*@
+                                    <br />
+                                    @*@Html.TextBoxFor(ChequeDetails => ChequeDetails.StartDate, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(ChequeDetails => ChequeDetails.StartDate)*@
+                                    From Date <input required type="date" id="StartDate" size="5"> To Date <input required type="date" id="EndDate" size="5">
+                                </div>
+                                <br /><br />
+                                @*<div class="form-group">
+                                        @Html.LabelFor(c => c.LessorId)
+                                        @Html.DropDownListFor(c => c.LessorId, new SelectList(ViewBag.Lessor, "Id", "Name"), "------Select Lessor------", new { @class = "form-control" })
+                                    </div>*@
+                                <div class="form-group">
+                                    @Html.LabelFor(c => c.BuildingId)
+                                    @Html.DropDownListFor(c => c.BuildingId, new SelectList(ViewBag.Building, "Id", "Name"), "------Select Building------", new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(TenancyAgreement => TenancyAgreement.AgreementNumber)
+                                    @Html.DropDownListFor(TenancyAgreement => TenancyAgreement.AgreementNumber, new SelectList("", "AgreementNumber", "AgreementNumber"), new { @class = "form-control" })
+                                </div>
+
+                                <br />
+                                @*<button type="submit" class="btn btn-info" id="btnShowresult">Show Result</button>*@
+                                <br /><br />
+                            }
+
+                        </div>
+
+                        <div class="col-md-10 col-md-offset-1">
+                            @*<div class="position-center">
+
+                                    <label for="inpLessorName">
+                                        <input id="inpLessorName" placeholder="Lessor: " style="border:none">
+                                    </label>
+                                    <label for="inpAreaName">
+                                        <input id="inpAreaName" placeholder="Area: " style="border:none">
+                                    </label>
+
+                                </div>*@
+                            <button class="btn btn-primary" onclick="javascript: fnExcelReport('viewProperty', 'data')">Export To Excel</button>
+                            <br />
+                            <table class="table table-responsive table-striped" id="viewProperty">
+                                <thead>
+                                    <tr class="bg-table">
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.AgreementNumber)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TotalAmount)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.StartDateDetail)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.EndDateDetail)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.BuildingName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FlatNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FlatType)
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="property"></tbody>
+                            </table>
+
+                            <br /><br />
+                            <table class="table table-responsive table-striped" id="viewCheques">
+                                <thead>
+                                    <tr class="bg-table">
+                                        <th>
+                                            Tenant Agreement Number
+                                        </th>
+                                        <th>
+                                            Cheque Number
+                                        </th>
+                                        <th>
+                                            Amount
+                                        </th>
+                                        <th>
+                                            Cheque Date Detail
+                                        </th>
+                                        <th>
+                                            IsCashed
+                                        </th>
+                                        <th>
+                                            Payment From Cash
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cheques"></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("tr.rows").click(function () {
+                alert("Click!");
+            });
+        });
+
+        $(document).ready(function () {
+            $("#BuildingId").change(function () {
+              //$("#btnShowresult").click(function () {
+                //var lessorId = $("#LessorId").val();
+                var buildingId = $("#BuildingId").val();
+                var startDate = $("#StartDate").val();
+                var endDate = $("#EndDate").val();
+                //var renewalTenancyAgreement = 0;
+                //if ($('#RenewalTenancyAgreement').is(":checked"))
+                //    RenewalTenancyAgreement = 1;
+                //else
+                //    RenewalTenancyAgreement = 0;
+
+                $("#property").empty();
+                $("#AgreementNumber").empty();
+
+                var json = { BuildingId: buildingId, StartDate: startDate, EndDate: endDate };
+                var TName = null;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ViewRenewalTenancyAgreement", "TenancyAgreement")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (property) {
+                        for (var i = 0; i < property.length; i++) {
+                            //$("#inpLessorName").val(property[i].LessorName);
+                            //$("#inpAreaName").val(property[i].AreaName);
+
+                            $("#viewProperty").find('tbody').append(
+                                '<tr> '+
+                                '<td>' + property[i].AgreementNumber + '</td>' +
+                                '<td>' + property[i].TotalAmount + '</td>' +
+                                '<td>' + property[i].StartDateDetail + '</td>' +
+                                '<td>' + property[i].EndDateDetail + '</td>' +
+                                '<td>' + property[i].BuildingName + '</td>' +
+                                '<td>' + property[i].FlatNo + '</td>' +
+                                '<td>' + property[i].FlatType + '</td>' +
+                                '</tr > ');
+                        }
+
+                        $("#AgreementNumber").append('<option value=' + "" + '>' + "------Select Agreement------" + '</option>');
+                        $.each(property, function (key, value) {
+                            $("#AgreementNumber").append('<option value=' + value.AgreementNumber + '>' + value.AgreementNumber + '</option>');
+
+                        });
+                    }
+                });
+            });
+        });
+
+         $(document).ready(function () {
+             $("#AgreementNumber").change(function () {
+                 var AgreementNumber = $("#AgreementNumber").val();
+                 $("#cheques").empty();
+                 var json = { agreementNo: AgreementNumber };
+                var TName = null;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ViewChequeDetailsByAgeementNo", "TenancyAgreement")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (property) {
+                        for (var i = 0; i < property.length; i++) {
+
+                            $("#viewCheques").find('tbody').append(
+                                '<tr> ' +
+                                '<td>' + property[i].TenantAgreementNumber + '</td>' +
+                                '<td>' + property[i].ChequeNumber + '</td>' +
+                                '<td>' + property[i].Amount + '</td>' +
+                                '<td>' + property[i].ChequeDateDetail + '</td>' +
+                                '<td>' + property[i].IsCashed + '</td>' +
+                                '<td>' + property[i].PaymentFromCash + '</td>' +
+                                '</tr > ');
+                        }
+                    }
+                });
+            });
+         });
+
+    </script>
+}
+

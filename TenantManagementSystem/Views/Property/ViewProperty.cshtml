@@ -1,0 +1,197 @@
+﻿@model  IEnumerable<TenantManagementSystem.Models.PropertyVM>
+@{
+    ViewBag.Title = "ViewBuildingVillas";
+    Layout = "~/Views/Shared/_MasterLayoutPage.cshtml";
+}
+<script src="~/Content/FileSaver.js"></script> @*could be downloaded from https://github.com/eligrey/FileSaver.js/blob/master/src/FileSaver.js*@
+<script>
+    function fnExcelReport(id, name) {
+        var tab_text = '<html xmlns: x="urn:schemas-microsoft-com:office:excel">';
+        tab_text = tab_text + '<head><xml><x: ExcelWorkbook><x: ExcelWorksheets><x: ExcelWorksheet>';
+        tab_text = tab_text + '<x: Name>Test Sheet</x: Name>';
+        tab_text = tab_text + '<x: WorksheetOptions><x: Panes></x: Panes></x: WorksheetOptions ></x: ExcelWorksheet > ';
+        tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+        tab_text = tab_text + "<table border='1px' style='color:black'>";
+        var exportTable = $('#' + id).clone();
+        exportTable.find('th').last().remove();
+        exportTable.find('input').each(function (index, elem) { $(elem).remove(); });
+        exportTable.find('a').each(function (index, elem) { $(elem).remove(); });
+        tab_text = tab_text + exportTable.html();
+        tab_text = tab_text + '</table></body></html>';
+        var fileName = "Demo" + '.xls';
+        //Save the file
+        var blob = new Blob([tab_text], { type: "application/vnd.ms-excel;charset=utf-8" })
+        window.saveAs(blob, fileName);
+    }
+</script>
+
+<h2>Building Villas</h2>
+
+<!DOCTYPE html>
+<br /><br /><br /><br /><br />
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>View</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "SaveBuildingVillas")
+    </p>
+    <br />
+    @*<button class="form-group">
+        @Html.LabelFor(t => t.PropertyType)
+        @Html.DropDownListFor(t => t.PropertyType, new SelectList(ViewBag.PropertyType, "Id", "PropertyTypeDescription"), new { @class = "form-control" })
+
+        @Html.ValidationMessageFor(t => t.PropertyType)
+    </button>*@
+    <button class="btn btn-primary" onclick="javascript: fnExcelReport('dataTable', 'data')">Export To Excel</button>
+    <br /><br />
+    <table class="table" id="dataTable">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.CompanyId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BranchId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AreaId)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.AreaName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.CityId)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.CityName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.LessorId)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.LessorName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.BuildingId)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlatNumber)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.FlatTypeId)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.FlatTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyTypeName)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.BondNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BondType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GovernmentNumber)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.PilotNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Street)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CompanyId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BranchId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AreaId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.AreaName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CityId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.CityName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.LessorId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.LessorName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.BuildingId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.BuildingName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlatNumber)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.FlatTypeId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlatTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyTypeName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.BondNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BondType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GovernmentNumber)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.PilotNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Street)
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
